@@ -1,6 +1,7 @@
 from classes import player, dice, score
 import time
 import sys
+from scoring import recommend
 
 print("\n\nWelcome to Yahtzee!\n\n")
 player_num = int(input('How many players?\n'))
@@ -17,7 +18,7 @@ for n in range(player_num):
     players[n].score = score()
 
 for n in range(player_num):
-    print(f"Player {n+1} start!\n")
+    print(f"\nPlayer {n+1} start!\n")
     players[n].hand = dice(5)
     start = input('Press Enter to roll your first hand!')
 
@@ -26,10 +27,13 @@ for n in range(player_num):
 
     for i in range(2):
         s = input(
-            "\n\nEnter positions of dice you would like to re-roll. Ex: 1,2,3\nIf none, type 'none'\n").lower()
+            "\n\nEnter positions of dice you would like to re-roll. (Ex: 1,2,3) If none, type 'none'\n\n").lower()
         if s != "none":
             roll_id = list(map(int, s.split(",")))
             players[n].hand.roll(roll_id)
             print(f"\nYour current hand: {players[n].hand.values}")
         else:
             print(f"\nYour current hand: {players[n].hand.values}")
+
+    rec = recommend(players[n].hand.values)
+    print(f"Recommended plays: {rec}")
