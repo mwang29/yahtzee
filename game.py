@@ -36,4 +36,8 @@ for n in range(player_num):
             print(f"\nYour current hand: {players[n].hand.values}")
 
     rec = recommend(players[n].hand.values)
-    print(f"Recommended plays: {rec}")
+    print(f"Recommended categories: {rec}")
+
+    cat = input("Please enter which category you would like to score:")
+    func = getattr(score, cat)
+    players[n].score.func(players[n].hand.values)
