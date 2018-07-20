@@ -22,119 +22,138 @@ class dice():
 
 
 class score():
-    def __init__(self):
-        self.ones = None
-        self.twos = None
-        self.threes = None
-        self.fours = None
-        self.fives = None
-        self.sixes = None
-        self.three_of_a_kind = None
-        self.four_of_a_kind = None
-        self.full_house = None
-        self.small_straight = None
-        self.large_straight = None
-        self.chance = None
-        self.yahtzee = None
-        self.yahtzee_bonus = None
-        self.bonus = None
-        self.total = None
+    def __init__(self, name):
+        self.one = None
+        self.two = None
+        self.three = None
+        self.four = None
+        self.five = None
+        self.six = None
+        self.toak = None
+        self.foak = None
+        self.fh = None
+        self.ss = None
+        self.ls = None
+        self.c = None
+        self.y = None
+        self.yb = None
+        self.b = None
+        self.total = 0
+        self.name = name
 
     def ones(self, hand):
-        if self.ones == None:
-            self.ones = hand.count(1)
-            self.total += self.ones
+        if self.one is None:
+            self.one = hand.count(1)
+            self.total += self.one
         else:
             return("Already scored!")
 
     def twos(self, hand):
-        if self.twos == None:
-            self.twos = 2 * hand.count(2)
-            self.total += self.twos
+        if self.two is None:
+            self.two = 2 * hand.count(2)
+            self.total += self.two
         else:
             return("Already scored!")
 
     def threes(self, hand):
-        if self.threes == None:
-            self.threes = 3 * hand.count(3)
-            self.total += self.threes
+        if self.three is None:
+            self.three = 3 * hand.count(3)
+            self.total += self.three
         else:
             return("Already scored!")
 
     def fours(self, hand):
-        if self.fours == None:
-            self.fours = 4 * hand.count(4)
-            self.total += self.fours
+        if self.four is None:
+            self.four = 4 * hand.count(4)
+            self.total += self.four
         else:
             return("Already scored!")
 
     def fives(self, hand):
-        if self.fives == None:
-            self.fives = 5 * hand.count(5)
-            self.total += self.fives
+        if self.five is None:
+            self.five = 5 * hand.count(5)
+            self.total += self.five
         else:
             return("Already scored!")
 
     def sixes(self, hand):
-        if self.sixes == None:
-            self.sixes = 5 * hand.count(6)
-            self.total += self.sixes
+        if self.six is None:
+            self.six = 5 * hand.count(6)
+            self.total += self.six
         else:
             return("Already scored!")
 
     def three_of_a_kind(self, hand):
-        if self.three_of_a_kind == None:
-            if counter(hand).values() >= 4:
-                self.three_of_a_kind = sum(hand)
+        if self.toak is None:
+            if Counter(hand).values() >= 4:
+                self.toak = sum(hand)
             else:
-                self.three_of_a_kind = 0
-            self.total += self.three_of_a_kind
+                self.toak = 0
+            self.total += self.toak
         else:
             return("Already scored!")
 
     def four_of_a_kind(self, hand):
-        if self.four_of_a_kind == None:
-            if counter(hand).values() >= 4:
-                self.four_of_a_kind = sum(hand)
+        if self.foak is None:
+            if Counter(hand).values() >= 4:
+                self.foak = sum(hand)
             else:
-                self.four_of_a_kind = 0
-            self.total += self.four_of_a_kind
+                self.foak = 0
+            self.total += self.foak
         else:
             return("Already scored!")
 
     def yahtzee(self, hand):
-        if self.yahtzee == None:
-            if counter(hand).values() == 5:
-                self.yahtzee == 50
+        if self.y is None:
+            if Counter(hand).values() == 5:
+                self.y == 50
             else:
-                self.yahtzee == 0
-            self.total += self.yahtzee
+                self.y == 0
+            self.total += self.y
         else:
             return("Already scored!")
 
     def yahtzee_bonus(self, hand):
-        if counter(hand).values() == 5 and self.yahtzee == 50:
-            self.yahtzee_bonus += 100
+        if Counter(hand).values() == 5 and self.y == 50:
+            self.yb += 100
             self.total += 100
         else:
             return("Error! You cannot score Yahtzee Bonus!")
 
     def small_straight(self, hand):
-        if self.small_straight == None:
-            if counter(hand).keys() >= 4:
-                self.small_straight = 30
+        if self.ss is None:
+            if len(Counter(hand).keys()) >= 4:
+                self.ss = 30
             else:
-                self.small_straight = 0
-            self.total += self.small_straight
+                self.ss = 0
+            self.total += self.ss
         else:
             return("Already scored!")
 
     def large_straight(self, hand):
-        if self.large_straight == None:
-            if counter(hand).keys() == 5:
-                self.large_straight = 40
+        if self.ls is None:
+            if len(Counter(hand).keys()) == 5:
+                self.ls = 40
             else:
-                self.large_straight = 0
-            self.total += self.large_straight
+                self.ls = 0
+            self.total += self.ls
         else:
             return("Already scored!")
+
+    def full_house(self, hand):
+        if self.fh is None:
+            if all(x in Counter(hand).values() for x in [2, 3]):
+                self.fh = 25
+            else:
+                self.fh = 0
+        else:
+            return("Already scored!")
+
+    def chance(self, hand):
+        if self.c is None:
+            self.c = sum(hand)
+        else:
+            return("Already scored!")
+
+    def total_score(self):
+        print(f"Current score is {self.total}")
