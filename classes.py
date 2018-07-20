@@ -156,4 +156,4 @@ class score():
             return("Already scored!")
 
     def total_score(self):
-        print(f"Current score is {self.total}")
+        print(f"{self.name}'s current score is {self.total}")

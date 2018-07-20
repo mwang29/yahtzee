@@ -40,8 +40,11 @@ for n in range(player_num):
     rec = recommend(hands[n].values)
     print(f"Recommended categories: {rec}")
 
-    cat = input("Please enter which category you would like to score:")
+    cat = input("Please enter which category you would like to score:").lower()
+    cat = cat.replace(" ", "_")
     getattr(scores[n], cat)(hands[n].values)
-    # Converts input category to method
-    # players[n].score.func(players[n].hand.values)
+    # Converts input category to method, passes final hand to score
+
     scores[n].total_score()
+
+    # prints score so far
