@@ -1,4 +1,12 @@
 import random as r
+from collections import Counter
+
+
+class player():
+    def __init__(self, n=0):
+        self.score = None
+        self.hand = None
+        self.name = n
 
 
 class dice():
@@ -31,20 +39,48 @@ class score():
         self.yahtzee_bonus = 0
         self.bonus = 0
 
-    def ones(self, player):
-        self.ones = player.count(1)
+    def ones(self, hand):
+        self.ones = hand.count(1)
 
-    def twos(self, player):
-        self.twos = 2 * player.count(2)
+    def twos(self, hand):
+        self.twos = 2 * hand.count(2)
 
-    def threes(self, player):
-        self.threes = 3 * player.count(3)
+    def threes(self, hand):
+        self.threes = 3 * hand.count(3)
 
-    def fours(self, player):
-        self.fours = 4 * player.count(4)
+    def fours(self, hand):
+        self.fours = 4 * hand.count(4)
 
-    def fives(self, player):
-        self.fives = 5 * player.count(5)
+    def fives(self, hand):
+        self.fives = 5 * hand.count(5)
 
-    def sixes(self, player):
-        self.sixes = 5 * player.count(6)
+    def sixes(self, hand):
+        self.sixes = 5 * hand.count(6)
+
+    def three_of_a_kind(self, hand):
+        for i in range(1, 7):
+            if hand.count(i) >= 3:
+                self.three_of_a_kind = sum(hand)
+
+    def four_of_a_kind(self, hand):
+        for i in range(1, 7):
+            if hand.count(i) >= 4:
+                self.four_of_a_kind = sum(hand)
+
+    def yahtzee(self, hand):
+        for i in range(1, 7):
+            if hand.count(i) == 5:
+                self.yahtzee == 50
+
+    def yahtzee_bonus(self, hand):
+        for i in range(1, 7):
+            if hand.count(i) == 5 and self.yahtzee == 50:
+                self.yahtzee_bonus = 100
+
+    def small_straight(self, hand):
+        if counter(hand).keys() >= 4:
+            self.small_straight = 30
+
+    def large_straight(self, hand):
+        if counter(hand).keys() == 5:
+            self.large_straight = 40

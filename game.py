@@ -1,25 +1,35 @@
-from classes import dice
+from classes import player, dice, score
+import time
+import sys
 
 print("\n\nWelcome to Yahtzee!\n\n")
-start = input('Press Enter to roll your first hand!')
+player_num = int(input('How many players?\n'))
+players = []
+wait = "................................."
+# empty list of players
 
-player_1 = dice(5)  # initialize 5 dice
-print(f"\n\nYour current hand: {player_1.values}")
+for n in range(player_num):
+    if n == 0:
+        new_name = input("Please enter a name: ")
+    else:
+        new_name = input("Please enter another name: ")
+    players.append(player(new_name))
+    players[n].score = score()
 
-# Roll 2
-s = input("\n\nEnter poisitions of dice you would like to re-roll. Ex: 1,2,3\nIf none, type 'none'\n").lower()
-if s != "none":
-    roll_id = list(map(int, s.split(",")))
-    player_1.roll(roll_id)
-    print(f"\nYour current hand: {player_1.values}")
-else:
-    print(f"\nYour current hand: {player_1.values}")
+for n in range(player_num):
+    print(f"Player {n+1} start!\n")
+    players[n].hand = dice(5)
+    start = input('Press Enter to roll your first hand!')
 
-# Roll 3
-s = input("\n\nEnter poisitions of dice you would like to re-roll. Ex: 1,2,3\nIf none, type 'none'\n").lower()
-if s != "none":
-    roll_id = list(map(int, s.split(",")))
-    player_1.roll(roll_id)
-    print(f"\nYour current hand: {player_1.values}")
-else:
-    print(f"\nYour current hand: {player_1.values}")
+    print(f"Your roll is.. \n\n")
+    print(players[n].hand.values)
+
+    for i in range(2):
+        s = input(
+            "\n\nEnter positions of dice you would like to re-roll. Ex: 1,2,3\nIf none, type 'none'\n").lower()
+        if s != "none":
+            roll_id = list(map(int, s.split(",")))
+            players[n].hand.roll(roll_id)
+            print(f"\nYour current hand: {players[n].hand.values}")
+        else:
+            print(f"\nYour current hand: {players[n].hand.values}")
